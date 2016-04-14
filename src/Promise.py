@@ -28,18 +28,18 @@ class Promise(object):
         if onFulfilled is not None:
             if not hasattr(onFulfilled, '__call__'):
                 raise Exception('Promise fulfiller object must be callable')
-            self.__fulfillers.push(onFulfilled)
+            self.__fulfillers.append(onFulfilled)
 
         if onRejected is not None:
             if not hasattr(onRejected, '__call__'):
                 raise Exception('Promise rejector object must be callable')
-            self.__rejectors.push(onRejected)
+            self.__rejectors.append(onRejected)
 
     def catch(self, onRejected=None):
         if onRejected is not None:
             if not hasattr(onRejected, '__call__'):
                 raise Exception('Promise rejector object must be callable')
-            self.__rejectors.push(onRejected)
+            self.__rejectors.append(onRejected)
 
     @staticmethod
     def reject(reason=None):
