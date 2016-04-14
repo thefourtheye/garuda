@@ -12,34 +12,34 @@ class Promise(object):
         self.__rejectors = []
         self.__state = PENDING
 
-    def isPending(self):
+    def is_pending(self):
         return self._Promise__state == PENDING
 
-    def isFulfilled(self):
+    def is_fulfilled(self):
         return self._Promise__state == FULFILLED
 
-    def isRejected(self):
+    def is_rejected(self):
         return self._Promise__state == REJECTED
 
-    def getState(self):
+    def get_state(self):
         return STATES[self._Promise__state]
 
-    def then(self, onFulfilled=None, onRejected=None):
-        if onFulfilled is not None:
-            if not hasattr(onFulfilled, '__call__'):
+    def then(self, on_fulfilled=None, on_rejected=None):
+        if on_fulfilled is not None:
+            if not hasattr(on_fulfilled, '__call__'):
                 raise Exception('Promise fulfiller object must be callable')
-            self.__fulfillers.append(onFulfilled)
+            self.__fulfillers.append(on_fulfilled)
 
-        if onRejected is not None:
-            if not hasattr(onRejected, '__call__'):
+        if on_rejected is not None:
+            if not hasattr(on_rejected, '__call__'):
                 raise Exception('Promise rejector object must be callable')
-            self.__rejectors.append(onRejected)
+            self.__rejectors.append(on_rejected)
 
-    def catch(self, onRejected=None):
-        if onRejected is not None:
-            if not hasattr(onRejected, '__call__'):
+    def catch(self, on_rejected=None):
+        if on_rejected is not None:
+            if not hasattr(on_rejected, '__call__'):
                 raise Exception('Promise rejector object must be callable')
-            self.__rejectors.append(onRejected)
+            self.__rejectors.append(on_rejected)
 
     @staticmethod
     def reject(reason=None):
